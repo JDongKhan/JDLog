@@ -13,6 +13,11 @@
 + (instancetype)shareInstance;
 
 /**
+ 配置
+ */
+- (void)config;
+
+/**
  读取日志文件内容
  */
 - (NSString *)readLog;

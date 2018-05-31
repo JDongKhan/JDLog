@@ -25,29 +25,26 @@
     static JDLogFileManager *logFileManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        logFileManager = [[JDLogFileManager alloc] initWithFileHandle];
+        logFileManager = [[JDLogFileManager alloc] init];
         
     });
     return logFileManager;
 }
 
-// 将NSLog打印信息保存到Document目录下的文件中
-- (void)redirectNSlogToDocumentFolder {
+- (void)config {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths firstObject];
+    NSString *fileName = @"JDLog.log";
+    self.filePath = [documentDirectory stringByAppendingPathComponent:fileName];
+    //改写NSLog输出目录
+    [self redirectNSlogToCachesFolder];
+}
+
+// 将NSLog打印信息保存到Caches目录下的文件中
+- (void)redirectNSlogToCachesFolder {
     // 将log输入到文件
     freopen([self.filePath cStringUsingEncoding:NSASCIIStringEncoding], "a+", stdout);
     freopen([self.filePath cStringUsingEncoding:NSASCIIStringEncoding], "a+", stderr);
-}
-
-- (instancetype)initWithFileHandle {
-    if (self = [super init]) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        NSString *documentDirectory = [paths firstObject];
-        NSString *fileName = @"JDLog.log";
-        self.filePath = [documentDirectory stringByAppendingPathComponent:fileName];
-        //改写NSLog输出目录
-        [self redirectNSlogToDocumentFolder];
-    }
-    return self;
 }
 
 - (NSString *)readLog {
