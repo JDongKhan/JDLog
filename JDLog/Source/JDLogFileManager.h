@@ -15,7 +15,7 @@
 /**
  配置
  */
-- (void)config;
+- (void)start;
 
 /**
  读取日志文件内容

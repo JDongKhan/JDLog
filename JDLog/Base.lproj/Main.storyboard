@@ -18,16 +18,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RrX-Db-Sgk">
-                                <rect key="frame" x="44" y="111" width="108" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RrX-Db-Sgk">
+                                <rect key="frame" x="44" y="137" width="108" height="30"/>
                                 <state key="normal" title="显示日志控制台"/>
                                 <connections>
                                     <action selector="showAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q2f-yW-2gG"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZs-0M-iar">
+                                <rect key="frame" x="44" y="87" width="62" height="30"/>
+                                <state key="normal" title="模拟异常"/>
+                                <connections>
+                                    <action selector="exceptionAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JSN-qk-WsN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4CN-6x-go2">
+                                <rect key="frame" x="44" y="187" width="77" height="30"/>
+                                <state key="normal" title="定时打日志"/>
+                                <connections>
+                                    <action selector="timerLogAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4NP-4o-zlm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6Y-6G-LWQ">
+                                <rect key="frame" x="44" y="237" width="77" height="30"/>
+                                <state key="normal" title="停止打日志"/>
+                                <connections>
+                                    <action selector="stopLogAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4C6-vi-IMg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="RrX-Db-Sgk" firstAttribute="top" secondItem="nZs-0M-iar" secondAttribute="bottom" constant="20" id="0JC-ES-4td"/>
+                            <constraint firstItem="q6Y-6G-LWQ" firstAttribute="leading" secondItem="4CN-6x-go2" secondAttribute="leading" id="0xF-ko-B2v"/>
+                            <constraint firstItem="RrX-Db-Sgk" firstAttribute="leading" secondItem="nZs-0M-iar" secondAttribute="leading" id="DkA-Kq-LzV"/>
+                            <constraint firstItem="4CN-6x-go2" firstAttribute="leading" secondItem="RrX-Db-Sgk" secondAttribute="leading" id="HWI-HI-x3f"/>
+                            <constraint firstItem="4CN-6x-go2" firstAttribute="top" secondItem="RrX-Db-Sgk" secondAttribute="bottom" constant="20" id="acn-FH-JhW"/>
+                            <constraint firstItem="nZs-0M-iar" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="23" id="cgP-kY-zL2"/>
+                            <constraint firstItem="nZs-0M-iar" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="44" id="wL2-tu-Emj"/>
+                            <constraint firstItem="q6Y-6G-LWQ" firstAttribute="top" secondItem="4CN-6x-go2" secondAttribute="bottom" constant="20" id="zNZ-BD-A7g"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="fbv-gR-CY6"/>

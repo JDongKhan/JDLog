@@ -57,6 +57,8 @@
     
     //两种实现方式，第一种监听文件变化
     __weak JDLogViewController *weakSelf = self;
+    //先读一次
+    [self updateTextView];
     [[JDLogFileManager shareInstance] watcherLog:^(NSInteger type) {
         [weakSelf updateTextView];
     }];
@@ -152,6 +154,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.regexString = textField.text;
+    [self updateTextView];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

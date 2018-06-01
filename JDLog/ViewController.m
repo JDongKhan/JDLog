@@ -10,7 +10,9 @@
 #import "JDLogViewController.h"
 #import "JDLogFileManager.h"
 
-@interface ViewController ()
+@interface ViewController () {
+    NSTimer *_timer;
+}
 
 @end
 
@@ -18,8 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[JDLogFileManager shareInstance] config];
-     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(log) userInfo:nil repeats:YES];
+    [[JDLogFileManager shareInstance] start];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -28,9 +29,20 @@
     NSLog(@"%ld",i);
     NSLog(@"%@",self);
 }
+- (IBAction)exceptionAction:(id)sender {
+    if ([@"1" containsString:nil]) {
+    }
+}
 
 - (IBAction)showAction:(id)sender {
     [self.navigationController pushViewController:[[JDLogViewController alloc] init] animated:YES];
+}
+- (IBAction)timerLogAction:(id)sender {
+    [_timer invalidate];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(log) userInfo:nil repeats:YES];
+}
+- (IBAction)stopLogAction:(id)sender {
+    [_timer invalidate];
 }
 
 - (void)didReceiveMemoryWarning {

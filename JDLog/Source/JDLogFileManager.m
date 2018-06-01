@@ -31,7 +31,7 @@
     return logFileManager;
 }
 
-- (void)config {
+- (void)start {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths firstObject];
     NSString *fileName = @"JDLog.log";
