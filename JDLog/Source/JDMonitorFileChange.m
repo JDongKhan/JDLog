@@ -7,8 +7,8 @@
 //
 
 #import "JDMonitorFileChange.h"
+
 @interface JDMonitorFileChange () {
-@private
   NSURL *_fileURL;
   dispatch_source_t _source;
   int _fileDescriptor;
