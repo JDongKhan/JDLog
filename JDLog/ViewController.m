@@ -18,8 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [JDLogFileManager shareInstance];
-     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(log) userInfo:nil repeats:YES];
+    [[JDLogFileManager shareInstance] config];
+     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(log) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
