@@ -1,6 +1,10 @@
 # JDLog
 将NSLog写入文件并显示在手机控制台上，方便测试包日志调试
 
+它不止可以显示我们自己的日志，包括异常系统、第三方日志都可以显示。
+
+原理是更改了NSLog的输出源，将日志写入文件并监控文件变化。
+
 效果图如下
 
 ![](https://github.com/JDongKhan/JDLog/blob/master/demo.gif)
