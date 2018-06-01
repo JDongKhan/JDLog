@@ -24,15 +24,15 @@
     self.fileChangeBlock = block;
     NSURL *url = [NSURL URLWithString:filePath];
     _fileURL = url;
-    [self __beginMonitoringFile];
+    [self beginMonitoringFile];
 }
 
 
 - (void)dealloc {
-    [self __close];
+    [self close];
 }
 
-- (void)__beginMonitoringFile {
+- (void)beginMonitoringFile {
     _fileDescriptor = open([[_fileURL path] fileSystemRepresentation],
                          O_EVTONLY);
     dispatch_queue_t defaultQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -44,19 +44,19 @@
     dispatch_source_set_event_handler(_source, ^ {
         __strong JDMonitorFileChange *strongSelf = weakSelf;
         unsigned long eventTypes = dispatch_source_get_data(strongSelf->_source);
-        [strongSelf __alertDelegateOfEvents:eventTypes];
+        [strongSelf alertDelegateOfEvents:eventTypes];
     });
     dispatch_resume(_source);
 }
 
-- (void)__close {
+- (void)close {
     close(_fileDescriptor);
     dispatch_source_cancel(_source);
     _fileDescriptor = 0;
     _source = nil;
 }
 
-- (void)__alertDelegateOfEvents:(unsigned long)eventTypes {
+- (void)alertDelegateOfEvents:(unsigned long)eventTypes {
     dispatch_async(dispatch_get_main_queue(), ^ {
         BOOL closeDispatchSource = NO;
         NSMutableSet *eventSet = [[NSMutableSet alloc] initWithCapacity:7];
@@ -89,7 +89,7 @@
             }
         }
         if (closeDispatchSource) {
-            [self __close];
+            [self close];
         }
     });
 }
