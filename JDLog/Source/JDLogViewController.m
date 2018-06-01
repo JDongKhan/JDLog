@@ -13,6 +13,8 @@
     BOOL _scrollBottomAble;
 }
 
+@property (nonatomic, strong) NSString *regexString;
+
 @property (nonatomic, strong) UITextView *textView;
 
 @property (nonatomic, strong) UIView *searchView;
@@ -70,7 +72,20 @@
 }
 
 - (void)updateTextView {
-    self.textView.text = [[JDLogFileManager shareInstance] readLog];
+    NSString *string = [[JDLogFileManager shareInstance] readLog];
+    if (self.regexString.length > 0) {
+        NSArray *dataArray = [string componentsSeparatedByString:@"\n"];
+        NSMutableArray *newArray = [NSMutableArray array];
+        for (NSString *string in dataArray) {
+            if ([string containsString:self.regexString]) {
+                [newArray addObject:string];
+            }
+        }
+        self.textView.text = [newArray componentsJoinedByString:@"\n"];
+    } else {
+        self.textView.text = string;
+    }
+    
     if (_scrollBottomAble) {
         [self scrollToBottom];
     }
@@ -136,14 +151,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    NSString *regex = @"^\n[.]*\n$";
-    NSString *string = textField.text;
-    NSRegularExpression *regularExpretion = [NSRegularExpression regularExpressionWithPattern:regex options:NSRegularExpressionCaseInsensitive error:nil];
-    NSArray *arrayOfAllMatches = [regularExpretion matchesInString:string options:0 range:NSMakeRange(0, string.length)];
-    for (NSTextCheckingResult *match in  arrayOfAllMatches) {
-        NSString *subStringForMatch = [string substringWithRange:match.range];
-        NSLog(@"%@",subStringForMatch);
-    }
+    self.regexString = textField.text;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
